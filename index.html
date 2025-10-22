@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Créateur d’espaces naturels à Saint-Étienne. Conception, aménagement et entretien de jardins sur mesure."
+    />
+    <meta
+      property="og:title"
+      content="L’Oasis Verte – Créateur d’espaces naturels"
+    />
+    <meta
+      property="og:description"
+      content="Conception, aménagement et entretien de jardins sur mesure à Saint-Étienne."
+    />
+    <meta property="og:image" content="images/ -51.jpg" />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+
+
+
+    <title>ACCUEIL</title>
+    <link rel="stylesheet" href="https://use.typekit.net/gkc3rmg.css" />
+    <link rel="stylesheet" href="responsive.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* ===== Keyframes ===== */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @keyframes fadeRight {
+        from {
+          opacity: 0;
+          transform: translateX(-24px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @keyframes fadeLeft {
+        from {
+          opacity: 0;
+          transform: translateX(24px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(16px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      @keyframes bob {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-4px);
+        }
+      }
+      @keyframes shimmer {
+        0% {
+          transform: translateX(-150%) rotate(12deg);
+        }
+        100% {
+          transform: translateX(150%) rotate(12deg);
+        }
+      }
+
+      /* ===== Utilitaires d’animation ===== */
+      .reveal {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1),
+          transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        will-change: transform, opacity;
+      }
+      .reveal.show {
+        opacity: 1;
+        transform: none;
+      }
+      .anim-fade-up {
+        animation: fadeUp 0.8s 0.05s both cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .anim-fade-right {
+        animation: fadeRight 0.8s 0.05s both cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .anim-fade-left {
+        animation: fadeLeft 0.8s 0.05s both cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .anim-rise {
+        animation: rise 0.7s 0.05s both cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .anim-bob {
+        animation: bob 3.2s ease-in-out infinite;
+      }
+
+      /* Delays rapides réutilisables */
+      .delay-1 {
+        animation-delay: 0.1s !important;
+        transition-delay: 0.1s !important;
+      }
+      .delay-2 {
+        animation-delay: 0.2s !important;
+        transition-delay: 0.2s !important;
+      }
+      .delay-3 {
+        animation-delay: 0.3s !important;
+        transition-delay: 0.3s !important;
+      }
+      .delay-4 {
+        animation-delay: 0.4s !important;
+        transition-delay: 0.4s !important;
+      }
+
+      /* ===== Shimmer “verre” sur les panneaux glass ===== */
+      .glass-shimmer {
+        position: relative;
+        overflow: hidden;
+      }
+      .glass-shimmer::after {
+        content: "";
+        position: absolute;
+        inset: auto -60% 0 auto;
+        top: -40%;
+        width: 40%;
+        height: 200%;
+        background: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.25) 45%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        filter: blur(8px);
+        opacity: 0.25;
+        pointer-events: none;
+        animation: shimmer 3.2s linear infinite;
+      }
+
+      /* ===== Hover pro pour les cards services ===== */
+      .card {
+        transform: translateY(0) scale(1);
+        transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+          box-shadow 0.45s;
+      }
+      .card:hover {
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+      }
+
+      /* ===== Bouton “verre” subtil ===== */
+      .glass-btn {
+        transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+          box-shadow 0.3s;
+      }
+      .glass-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+      }
+      .glass-btn:active {
+        transform: translateY(0);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+      }
+
+      /* Respecte l’utilisateur si il préfère moins d’animations */
+      @media (prefers-reduced-motion: reduce) {
+        .reveal,
+        .anim-fade-up,
+        .anim-fade-left,
+        .anim-fade-right,
+        .anim-rise,
+        .anim-bob {
+          animation: none !important;
+          transition: none !important;
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        .glass-shimmer::after {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="glass">
+      <header>
+        <nav>
+          <a href="index.html">accueil</a>
+          <a href="#philosophie">à propos</a>
+          <a href="#services">services</a>
+        </nav>
+
+        <div class="logo">
+          <img src="images/OASIS-VERTE-LOGO-05.png" alt="" />
+        </div>
+      </header>
+      <div class="banniere">
+        <h2 class="text-white text-[60px] reveal anim-fade-up delay-1">
+          l'oasis verte -
+        </h2>
+        <h1 class="reveal anim-fade-up delay-2">
+          Créateur d’espaces <br />naturels
+        </h1>
+        <button
+          class="glass-btn relative rounded-full px-10 py-4 text-white/90 text-lg font-semibold tracking-wide reveal anim-fade-up delay-3"
+        >
+          <a href="#contact"> Demandez&nbsp;votre&nbsp;devis&nbsp;gratuit</a>
+        </button>
+      </div>
+    </section>
+
+    <section
+      id="philosophie"
+      class="bg-[#E6E7E2] h-screen flex justify-between px-12 py-10"
+    >
+      <div
+        class="flex flex-col justify-center max-w-[550px] space-y-10 reveal anim-fade-right"
+      >
+        <h2
+          class="text-[60px] font-freight font-medium text-3xl text-[#2C412D]"
+        >
+          Philosophie
+        </h2>
+        <p class="text-[#2C412D] text-lg leading-relaxed">
+          L’Oasis Verte, c’est la passion du végétal et du design extérieur.
+          Nous concevons des jardins sur mesure, pensés pour votre confort et
+          votre sérénité.
+        </p>
+      </div>
+
+      <img
+        class="h-[80vh] w-auto max-w-[25vw] rounded-[50px] object-cover reveal anim-fade-left delay-2"
+        src="images/ -53.jpg"
+        alt=""
+      />
+    </section>
+
+    <section id="services" class="relative h-screen px-12 py-10 flex flex-col">
+      <!-- Voile pour le contraste -->
+
+      <div
+        class="relative h-full flex flex-col gap-10 justify-center space-y-10"
+      >
+        <h2
+          class="text-[60px] font-freight font-medium text-3xl text-white text-right"
+        >
+          services
+        </h2>
+
+        <!-- Cartes -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10 items-stretch"
+        >
+          <!-- Carte 01 -->
+          <div
+            class="relative rounded-[28px] card reveal anim-rise p-8 md:p-10 bg-white/10 backdrop-blur-xl ring-1 ring-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.25)] text-white overflow-hidden"
+          >
+            <!-- numéro -->
+            <span
+              class="absolute left-6 top-4 md:left-8 md:top-6 text-4xl md:text-5xl lg:text-6xl font-extrabold"
+              >01</span
+            >
+
+            <!-- médaillon logo -->
+            <div
+              class="absolute right-6 top-6 flex items-center justify-center anim-bob"
+            >
+              <img
+                src="images/OASIS-VERTE-LOGO-06.png"
+                alt="Logo"
+                class="h-[75px] w-[75px] object-contain"
+              />
+            </div>
+            <!-- titre -->
+            <div class="mt-24 md:mt-28 lg:mt-32 space-y-1">
+              <p
+                class="tracking-[0.35em] uppercase font-semibold text-sm md:text-base"
+              >
+                Conception &
+              </p>
+              <p
+                class="tracking-[0.35em] uppercase font-semibold text-sm md:text-base"
+              >
+                Design de jardin
+              </p>
+            </div>
+          </div>
+
+          <!-- Carte 02 (numéro en bas à droite) -->
+          <div
+            class="relative rounded-[28px] card reveal anim-rise p-8 md:p-10 bg-white/10 backdrop-blur-xl ring-1 ring-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.25)] text-white overflow-hidden"
+          >
+            <!-- médaillon logo -->
+            <div
+              class="absolute right-6 top-6 flex items-center justify-center anim-bob"
+            >
+              <img
+                src="images/OASIS-VERTE-LOGO-06.png"
+                alt="Logo"
+                class="h-[75px] w-[75px] object-contain"
+              />
+            </div>
+
+            <!-- titre centré verticalement -->
+            <div
+              class="h-full flex flex-col justify-center space-y-1 pt-6 pb-24"
+            >
+              <p
+                class="tracking-[0.35em] uppercase font-semibold text-sm md:text-base text-center md:text-left"
+              >
+                Aménagement
+              </p>
+              <p
+                class="tracking-[0.35em] uppercase font-semibold text-sm md:text-base text-center md:text-left"
+              >
+                Paysager
+              </p>
+            </div>
+
+            <!-- numéro -->
+            <span
+              class="absolute right-6 bottom-4 md:right-8 md:bottom-6 text-4xl md:text-5xl lg:text-6xl font-extrabold"
+              >02</span
+            >
+          </div>
+
+          <!-- Carte 03 -->
+          <div
+            class="relative rounded-[28px] card reveal anim-rise p-8 md:p-10 bg-white/10 backdrop-blur-xl ring-1 ring-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.25)] text-white overflow-hidden"
+          >
+            <!-- numéro -->
+            <span
+              class="absolute left-6 top-4 md:left-8 md:top-6 text-4xl md:text-5xl lg:text-6xl font-extrabold"
+              >03</span
+            >
+
+            <!-- médaillon logo -->
+            <div
+              class="absolute right-6 top-6 flex items-center justify-center anim-bob"
+            >
+              <img
+                src="images/OASIS-VERTE-LOGO-06.png"
+                alt="Logo"
+                class="h-[75px] w-[75px] object-contain"
+              />
+            </div>
+
+            <!-- titre -->
+            <div class="mt-24 md:mt-28 lg:mt-32 space-y-1">
+              <p
+                class="tracking-[0.35em] uppercase font-semibold text-sm md:text-base"
+              >
+                Arrosage &
+              </p>
+              <p
+                class="tracking-[0.35em] uppercase font-semibold text-sm md:text-base"
+              >
+                Entretien
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="rea" class="bg-[#E6E7E2] h-screen">
+      <!-- Titre -->
+      <h2
+        class="text-[60px] font-freight font-medium text-3xl text-[#2C412D] px-12 py-10 text-center"
+      >
+        réalisations
+      </h2>
+      <!--Galerie d'images -->
+      <div
+        id="realisations"
+        class="no-space-x flex flex-row space-x-4 h-full max-h-[90vh]"
+      >
+        <!--Images 1 -->
+        <div
+          class="image relative w-[24vw] h-[90%] group overflow-hidden reveal anim-rise delay-1"
+        >
+          <!-- Image -->
+          <img
+            src="images/ -51.jpg"
+            alt=""
+            class="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+          />
+
+          <!-- Overlay -->
+          <div class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+
+          <!-- Contenu au-dessus -->
+          <div
+            class="absolute top-4 pl-4 flex items-center justify-center text-white font-medium"
+          >
+            <p>01</p>
+          </div>
+          <div
+            class="absolute bottom-4 pl-4 flex items-center justify-center text-white font-medium"
+          >
+            <p>Un coin de nature apaisant.</p>
+          </div>
+        </div>
+
+        <div
+          class="image relative w-[24vw] h-[90%] group overflow-hidden reveal anim-rise delay-2"
+        >
+          <!-- Image 2 -->
+          <img
+            src="images/Unknown-69.jpg"
+            alt=""
+            class="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+          />
+
+          <!-- Overlay (apparaît au hover) -->
+          <div
+            class="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 transition duration-500 group-hover:opacity-100"
+          ></div>
+
+          <!-- Texte du haut (toujours visible) -->
+          <div
+            class="absolute top-4 pl-4 flex items-center text-white font-medium"
+          >
+            <p>02</p>
+          </div>
+
+          <!-- Texte du bas (apparaît au hover) -->
+          <div
+            class="absolute bottom-4 pl-4 flex items-center text-white font-medium opacity-0 translate-y-3 transition duration-500 group-hover:opacity-100 group-hover:translate-y-0"
+          >
+            <p>Un havre de verdure harmonieux.</p>
+          </div>
+        </div>
+
+        <div
+          class="image relative w-[24vw] h-[90%] group overflow-hidden reveal anim-rise delay-3"
+        >
+          <!-- Image 3 -->
+          <img
+            src="images/ -53.jpg"
+            alt=""
+            class="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+          />
+
+          <!-- Overlay (apparaît au hover) -->
+          <div
+            class="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 transition duration-500 group-hover:opacity-100"
+          ></div>
+
+          <!-- Texte du haut (toujours visible) -->
+          <div
+            class="absolute top-4 pl-4 flex items-center text-white font-medium"
+          >
+            <p>03</p>
+          </div>
+
+          <!-- Texte du bas (apparaît au hover) -->
+          <div
+            class="absolute bottom-4 pl-4 flex items-center text-white font-medium opacity-0 translate-y-3 transition duration-500 group-hover:opacity-100 group-hover:translate-y-0"
+          >
+            <p>Un espace où le calme s’installe.</p>
+          </div>
+        </div>
+
+        <div
+          class="image relative w-[24vw] h-[90%] group overflow-hidden reveal anim-rise delay-4"
+        >
+          <!-- Image 4 -->
+          <img
+            src="images/Unknown-68.jpg"
+            alt=""
+            class="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+          />
+
+          <!-- Overlay (apparaît au hover) -->
+          <div
+            class="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 transition duration-500 group-hover:opacity-100"
+          ></div>
+
+          <!-- Texte du haut (toujours visible) -->
+          <div
+            class="absolute top-4 pl-4 flex items-center text-white font-medium"
+          >
+            <p>04</p>
+          </div>
+
+          <!-- Texte du bas (apparaît au hover) -->
+          <div
+            class="absolute bottom-4 pl-4 flex items-center text-white font-medium opacity-0 translate-y-3 transition duration-500 group-hover:opacity-100 group-hover:translate-y-0"
+          >
+            <p>Un jardin pensé pour respirer.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="commentaires"
+      class="relative px-6 md:px-12 py-12 md:py-16 h-screen"
+    >
+      <!-- Panneau verre transparent au-dessus du body -->
+      <div
+        class="relative max-w-6xl mx-auto rounded-[32px] p-6 md:p-10 bg-white/5 ring-1 ring-white/20 shadow-[0_20px_60px_rgba(0,0,0,0.25),inset_0_1px_1px_rgba(255,255,255,0.25)] backdrop-blur-md h-[90%]"
+      >
+        <!-- Grille des cartes -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 pt-12">
+          <!-- Carte 1 -->
+          <article class="relative pt-12">
+            <!-- Avatar chevauchant -->
+            <div
+              class="avatar absolute left-1/2 -top-6 -translate-x-1/2 z-20 h-16 w-16 md:h-20 md:w-20 rounded-full overflow-hidden ring-2 ring-white/60 shadow-[0_8px_20px_rgba(0,0,0,0.25)]"
+            >
+              <img
+                src="images/femme-souriante-de-coup-moyen-posant.jpg"
+                alt="Claire Martin"
+                class="h-full w-full object-cover"
+              />
+            </div>
+
+            <!-- Corps de la carte (verre doux) -->
+            <div
+              class="rounded-2xl px-6 py-8 text-center bg-white/15 ring-1 ring-white/20 backdrop-blur-sm shadow-[0_10px_30px_rgba(0,0,0,0.25),inset_0_1px_1px_rgba(255,255,255,0.25)] space-y-10"
+            >
+              <h4
+                class="tracking-[0.25em] uppercase text-white/90 text-xs md:text-sm font-semibold mb-5"
+              >
+                Jardin méditerranéen à
+                <span class="whitespace-nowrap">Aix-en-Provence</span>
+              </h4>
+
+              <p class="text-white/85 text-[13px] leading-6 italic mb-6">
+                “L’Oasis Verte a transformé notre petit jardin en un vrai havre
+                de paix. Les idées sont originales et l’entretien est facile
+                grâce à leurs conseils avisés.”
+              </p>
+
+              <div
+                class="font-freight text-white/90 text-base md:text-lg tracking-wide"
+              >
+                CLAIRE MARTIN
+              </div>
+            </div>
+          </article>
+
+          <!-- Carte 2 -->
+          <article class="relative pt-12">
+            <div
+              class="avatar absolute left-1/2 -top-6 -translate-x-1/2 z-20 h-16 w-16 md:h-20 md:w-20 rounded-full overflow-hidden ring-2 ring-white/60 shadow-[0_8px_20px_rgba(0,0,0,0.25)]"
+            >
+              <img
+                src="images/concept-de-technologie-de-personnes-et-de-communication-man-au-parc-d-ete-grangfather-utilisant-un-telephone.jpg"
+                alt="Julien Dupont"
+                class="h-full w-full object-cover"
+              />
+            </div>
+
+            <div
+              class="rounded-2xl px-6 py-8 text-center bg-white/15 ring-1 ring-white/20 backdrop-blur-sm shadow-[0_10px_30px_rgba(0,0,0,0.25),inset_0_1px_1px_rgba(255,255,255,0.25)] space-y-10"
+            >
+              <h4
+                class="tracking-[0.25em] uppercase text-white/90 text-xs md:text-sm font-semibold mb-5"
+              >
+                Terrasse végétalisée — Marseille
+              </h4>
+
+              <p class="text-white/85 text-[13px] leading-6 italic mb-6">
+                “Super travail ! L’équipe est très professionnelle et à
+                l’écoute. Notre terrasse est maintenant un lieu qu’on adore
+                passer nos soirées.”
+              </p>
+
+              <div
+                class="font-freight text-white/90 text-base md:text-lg tracking-wide"
+              >
+                JULIEN DUPONT
+              </div>
+            </div>
+          </article>
+
+          <!-- Carte 3 -->
+          <article class="relative pt-12">
+            <div
+              class="avatar absolute left-1/2 -top-6 -translate-x-1/2 z-20 h-16 w-16 md:h-20 md:w-20 rounded-full overflow-hidden ring-2 ring-white/60 shadow-[0_8px_20px_rgba(0,0,0,0.25)]"
+            >
+              <img
+                src="images/belle-femme-mure-passant-du-temps-autour-de-la-ville.jpg"
+                alt="Sophie Legrand"
+                class="h-full w-full object-cover"
+              />
+            </div>
+
+            <div
+              class="rounded-2xl px-6 py-8 text-center bg-white/15 ring-1 ring-white/20 backdrop-blur-sm shadow-[0_10px_30px_rgba(0,0,0,0.25),inset_0_1px_1px_rgba(255,255,255,0.25)] space-y-10"
+            >
+              <h4
+                class="tracking-[0.25em] uppercase text-white/90 text-xs md:text-sm font-semibold mb-5"
+              >
+                Aménagement d’un coin détente — Saint-Étienne
+              </h4>
+
+              <p class="text-white/85 text-[13px] leading-6 italic mb-6">
+                “J’ai été bluffée par la créativité et le sens du détail de
+                L’Oasis Verte. Chaque plante est parfaitement choisie, le
+                résultat est harmonieux et reposant.”
+              </p>
+
+              <div
+                class="font-freight text-white/90 text-base md:text-lg tracking-wide"
+              >
+                SOPHIE LEGRAND
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section
+      id="contact"
+      class="relative h-screen flex flex-col justify-center items-center bg-[#E6E7E2] overflow-hidden"
+    >
+      <!-- Image de fond -->
+      <div class="absolute inset-0 flex justify-center items-center z-10">
+        <img
+          src="images/Unknown-59.jpg"
+          alt="Image de fond"
+          class="w-[100%] h-[80vh] object-cover object-[50%_80%] rounded-[250px]"
+        />
+      </div>
+
+      <!-- Couche glass (par-dessus l'image) -->
+      <div class="absolute inset-0 flex justify-center items-center z-20">
+        <div
+          class="w-[100%] h-[80vh] rounded-[250px] bg-white/10 ring-1 ring-white/20 shadow-[0_20px_80px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.3)] backdrop-blur-md"
+        ></div>
+      </div>
+
+      <!-- Contenu (tout en haut) -->
+      <div
+        class="contact relative z-30 w-[100%] h-[80vh] rounded-[250px] flex justify-between flex-wrap text-white px-20"
+      >
+        <h2 class="text-[96px] font-freight w-[100%] px-10">contact</h2>
+
+        <div class="space-y-4 text-lg px-10">
+          <div>
+            <h5 class="font-semibold uppercase tracking-wider text-white/90">
+              Contact
+            </h5>
+            <p>
+              contact@loasisverte.fr <br />
+              04 77 82 45 63
+            </p>
+          </div>
+
+          <div>
+            <h5 class="font-semibold uppercase tracking-wider text-white/90">
+              Adresse
+            </h5>
+            <p>12 rue des Tilleuls, <br />42000 Saint-Étienne</p>
+          </div>
+
+          <div>
+            <h5 class="font-semibold uppercase tracking-wider text-white/90">
+              Horaires
+            </h5>
+            <p>
+              Lundi – Vendredi : 8h30 → 18h30<br />
+              Samedi : 9h00 → 13h00<br />
+              Fermé le dimanche
+            </p>
+          </div>
+        </div>
+
+        <form class="space-y-3 mt-6 w-full max-w-md">
+          <input
+            id="nom"
+            type="text"
+            class="w-full bg-transparent border-b-[3px] border-white/70 focus:border-white outline-none text-white placeholder-white/60 text-lg"
+            placeholder="NOM ET PRÉNOM"
+          />
+
+          <input
+            id="email"
+            type="text"
+            class="w-full bg-transparent border-b-[3px] border-white/70 focus:border-white outline-none text-white placeholder-white/60 text-lg"
+            placeholder="EMAIL"
+          />
+
+          <input
+            id="message"
+            type="text"
+            class="w-full bg-transparent border-b-[3px] border-white/70 focus:border-white outline-none text-white placeholder-white/60 text-lg"
+            placeholder="MESSAGE"
+          />
+
+          <button
+            class="glass-btn relative rounded-full px-10 py-4 text-white/90 text-lg font-semibold tracking-wide"
+            type="button"
+          >
+            Envoyez
+          </button>
+        </form>
+      </div>
+
+      <!-- Texte bas de section -->
+      <p class="absolute bottom-4 text-[#2C412D] text-center max-w-2xl z-30">
+        Chaque projet commence par une idée… et un message. <br />
+        Contactez-nous, et imaginons ensemble votre oasis.
+      </p>
+    </section>
+
+    <footer class="bg-[#2C412D] text-white px-10 md:px-20 py-10">
+      <div
+        class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-start"
+      >
+        <!-- Logo + slogan -->
+        <div class="flex flex-col items-start space-y-4">
+          <img
+            src="images/OASIS-VERTE-LOGO-05.png"
+            alt="Logo Oasis Verte"
+            class="w-28"
+          />
+          <p class="text-sm text-white/80 max-w-xs leading-relaxed">
+            Créateur d’espaces naturels à Saint-Étienne.<br />
+            Conception, aménagement et entretien de jardins sur mesure.
+          </p>
+        </div>
+
+        <!-- Coordonnées -->
+        <div class="space-y-3 text-sm">
+          <h5 class="font-semibold uppercase tracking-wider text-white/80">
+            Contact
+          </h5>
+          <p>contact@loasisverte.fr</p>
+          <p>04 77 82 45 63</p>
+
+          <h5 class="font-semibold uppercase tracking-wider text-white/80 mt-4">
+            Adresse
+          </h5>
+          <p>12 rue des Tilleuls<br />42000 Saint-Étienne</p>
+
+          <h5 class="font-semibold uppercase tracking-wider text-white/80 mt-4">
+            Horaires
+          </h5>
+          <p>
+            Lundi – Vendredi : 8h30 → 18h30<br />
+            Samedi : 9h00 → 13h00<br />
+            Fermé le dimanche
+          </p>
+        </div>
+
+        <!-- Liens + Réseaux -->
+        <div class="flex flex-col md:items-end space-y-6 text-sm">
+          <div class="flex space-x-4">
+            <a href="#" class="hover:underline hover:text-white/70">Accueil</a>
+            <a href="#" class="hover:underline hover:text-white/70">À propos</a>
+            <a href="#" class="hover:underline hover:text-white/70"
+              >Réalisations</a
+            >
+            <a href="#" class="hover:underline hover:text-white/70">Contact</a>
+          </div>
+
+          <div class="flex space-x-4 text-white/80">
+            <a href="#" class="hover:text-white">Instagram</a>
+            <a href="#" class="hover:text-white">Facebook</a>
+            <a href="#" class="hover:text-white">Pinterest</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ligne de séparation -->
+      <div
+        class="border-t border-white/20 mt-10 pt-6 text-center text-xs text-white/60"
+      >
+        © 2025 L’Oasis Verte — Tous droits réservés.<br
+          class="block md:hidden"
+        />
+        Site réalisé par
+        <span class="text-white hover:text-white/80 cursor-pointer"
+          >Percevoir</span
+        >.
+      </div>
+    </footer>
+
+    <script>
+      const btn = document.getElementById("dropBtn");
+
+      btn.addEventListener("pointermove", (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        btn.style.setProperty("--x", `${x}%`);
+        btn.style.setProperty("--y", `${y}%`);
+      });
+
+      btn.addEventListener("click", () => {
+        btn.animate(
+          [
+            { transform: "scale(1)" },
+            { transform: "scale(1.08)" },
+            { transform: "scale(1)" },
+          ],
+          { duration: 220, easing: "cubic-bezier(.2,.8,.2,1)" }
+        );
+      });
+    </script>
+  </body>
+</html>

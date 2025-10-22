@@ -1,0 +1,357 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box !important;
+}
+
+body {
+  background-image: url("images/Unknown-59.jpg");
+  background-size: 100%;
+  background-repeat: repeat-y;
+}
+/*--------------------------- ACCUEIL SECTION -------------------------*/
+.glass {
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0);
+  border-radius: 16px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(7.9px);
+  -webkit-backdrop-filter: blur(7.9px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: auto;
+  margin: 40px 40px 0px 40px;
+  height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header nav a {
+  font-size: 20px;
+  text-decoration: none;
+  color: white;
+  font-family: dm-sans, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 30%;
+  text-transform: uppercase;
+  margin-left: 20px;
+}
+
+.logo {
+  width: 200px;
+  height: 100px;
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 20% 45%;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+}
+
+
+.glass h1 {
+  font-family: "dm-sans", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+  font-size: 34px;
+  text-transform: uppercase;
+  color: white;
+  margin-bottom: 50px;
+}
+
+.banniere {
+  margin-top: 10%;
+  margin-left: 20px;
+}
+
+
+.glass-btn{
+  position: relative;
+  isolation: isolate;
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  background: rgba(255, 255, 255, 0);
+  border: 1px solid rgba(255,255,255,.28);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.35) inset,
+    0 -1px 0 rgba(0,0,0,.12) inset,
+    0 18px 40px rgba(0,0,0,.35);
+  transition: all .3s ease;
+}
+.glass-btn::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius: inherit;
+  background:
+    radial-gradient(140% 180% at 20% 10%,
+      rgba(255,255,255,.55) 0%,
+      rgba(255,255,255,.18) 35%,
+      rgba(255,255,255,0) 60%),
+    radial-gradient(140% 180% at 80% 90%,
+      rgba(255,255,255,.18) 0%,
+      rgba(255,255,255,0) 55%);
+  mix-blend-mode: screen;
+  filter: blur(8px);
+  pointer-events:none;
+  z-index:-1;
+}
+.glass-btn::after{
+  content:"";
+  position:absolute; inset:0;
+  border-radius: inherit;
+  background:
+    radial-gradient(100% 100% at 50% 0%,
+      rgba(255,255,255,.70) 0%,
+      rgba(255,255,255,.25) 12%,
+      rgba(255,255,255,0) 35%) top/100% 65% no-repeat,
+    radial-gradient(120% 150% at 50% 120%,
+      rgba(0,0,0,.22) 0%,
+      rgba(0,0,0,0) 55%) bottom/100% 65% no-repeat,
+    linear-gradient(120deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,.22) 35%,
+      rgba(255,255,255,0) 60%) left/300% 100% no-repeat;
+  pointer-events:none;
+  animation: sheen 4s ease-in-out infinite;
+}
+@keyframes sheen{
+  0%,18%{background-position: top,bottom,-200% 0;}
+  55%,100%{background-position: top,bottom,200% 0;}
+}
+.glass-btn:hover{
+  transform: translateY(-2px);
+  box-shadow:
+    0 22px 50px rgba(0,0,0,.45),
+    0 0 0 6px rgba(255,255,255,.06);
+}
+.glass-btn:active{
+  transform: scale(0.98);
+}
+
+h2{
+  font-family: freight-big-pro, serif;
+
+  text-transform: uppercase;
+}
+
+span, p{
+  font-family: dm-sans, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.font-freight{
+  font-family: freight-big-pro, serif;
+}
+
+
+@media (max-width:768px){
+  header nav {
+    display: none;
+  
+  }
+
+.glass{
+  width: 90vw;
+  margin: 20px 0 0 20px;
+}
+
+.glass button{
+  width: 90%;
+}
+
+  body{
+    background-size: 200%;
+  }
+
+  .banniere{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding-top: 40%;
+    gap: 30px;
+    margin-left: 0;
+    align-items: center;
+  }
+
+ h2{
+    font-size: 40px !important;
+  }
+
+  #philosophie{
+    flex-direction: column;
+    text-align: center;
+    justify-content: inherit;
+    padding-top: 20%;
+    
+  }
+
+  #philosophie img{
+    max-width: none;
+    height: 50%;
+    margin-top: 30%;
+  }
+
+  #services h2{
+    text-align: left;
+  }
+
+  #realisations {
+    flex-direction: column !important;
+   width: 100%;
+   align-items: center;
+   height: 100%;
+   max-height:1300px ;
+   gap: 30px;
+   
+  }
+
+  .image{
+    width: 90% !important;
+    max-height: 300px !important;
+    
+  }
+
+  .image img{
+    object-position: 50% 70% !important;
+  }
+
+  .no-space-x > :not([hidden]) ~ :not([hidden]) {
+    margin-left: 0 !important;
+    margin-right: 0 !important; /* par sécurité si reverse */
+  }
+
+  #rea{
+    height: 100%;
+    min-height: 1500px;
+  }
+
+  #commentaires{
+    min-height: 1600px !important;
+  }
+
+  .avatar{
+    top: 0 !important;
+  }
+  #contact {
+    min-height: 100dvh;              /* évite les bugs de 100vh iOS */
+    padding: 16px 12px 28px;
+    gap: 12px;
+    align-items:inherit;
+  }
+  
+  /* — BG image (1er .absolute.inset-0) — */
+  #contact > .absolute.inset-0 img {
+    width: 100%;
+    height: 85vh;                    /* réduit sur mobile */
+    object-fit: cover;
+    object-position: 50% 70%;
+    border-radius: 24px !important;  /* remplace rounded-[250px] */
+  }
+  
+  /* — Couche glass (2e .absolute.inset-0 > div) — */
+  #contact > .absolute.inset-0 + .absolute > div {
+    height: 85vh !important;
+    border-radius: 24px !important;
+    background: rgba(255,255,255,0.08);            /* subtil, lisible */
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.22);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.28), inset 0 1px 1px rgba(255,255,255,0.28);
+  }
+  
+  /* — Contenu (relative z-30) — */
+  #contact > .relative.z-30 {
+    height: auto !important;
+    border-radius: 24px;             /* au-dessus du verre */
+    padding: 12px;
+    gap: 10px;
+    color: #fff;
+  }
+  
+  /* Titre */
+  #contact h2 {
+    width: 100%;
+    margin: 6px 0 10px;
+    padding: 0 4px;
+    font-family: freight-big-pro, serif;
+    font-size: 32px;                 /* 96px → 32px mobile */
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+  
+  /* Colonne infos (reste en pile sur mobile) */
+  #contact .space-y-4.text-lg {
+    font-size: 14px;
+    line-height: 1.55;
+    letter-spacing: .01em;
+    padding: 0 4px;
+  }
+  #contact h5 {
+    font-size: 12px;
+    letter-spacing: .18em;
+  }
+  
+  /* Formulaire – tap targets confortables */
+  #contact form {
+    width: 100%;
+    max-width: none;
+    margin-top: 8px;
+    padding: 0 4px;
+  }
+  #contact input[type="text"] {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    font-size: 15px;
+    color: #fff;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255,255,255,0.7);
+  }
+  #contact input::placeholder {
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+  }
+  #contact button[type="button"] {
+    width: 100%;
+    min-height: 48px;
+    font-weight: 700;
+    margin-top: 20px !important;
+  }
+  
+  /* Texte bas de section : passe en flux sur mobile */
+  #contact > p.absolute.bottom-4 {
+    position: static;
+    color: white;
+    text-align: center;
+    margin-top: 14px;
+    padding: 0 8px;
+    max-width: 42ch;
+  }
+  
+  /* Accessibilité focus */
+  #contact :focus-visible {
+    outline: 2px solid rgba(255,255,255,.85);
+    outline-offset: 2px;
+  }
+
+  
+  
+
+}
